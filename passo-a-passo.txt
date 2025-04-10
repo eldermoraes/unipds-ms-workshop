@@ -21,7 +21,7 @@ https://code.quarkus.io/
     - print LocalDateTime
     - porta 8081
 
-3) Criar time-api
+3) Criar time-app
     - porta 8082
     - Rest Client para time-api (TimeApiService)
     - print Rest Client
