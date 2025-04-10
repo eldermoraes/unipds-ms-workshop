@@ -1,0 +1,52 @@
+https://code.quarkus.io/
+
+1) criar duas apps:
+- time-api
+    - extensões
+        quarkus-rest
+        quarkus-container-image-jib
+        quarkus-kubernetes
+- time-app
+    - extensões
+        quarkus-rest
+        quarkus-container-image-jib
+        quarkus-kubernetes
+        quarkus-rest-client
+        quarkus-smallrye-fault-tolerance
+        quarkus-rest-jsonb
+        quarkus-rest-client-jsonb
+        quarkus-smallrye-health
+
+2) Criar time-api
+    - print LocalDateTime
+    - porta 8081
+
+3) Criar time-api
+    - porta 8082
+    - Rest Client para time-api (TimeApiService)
+    - print Rest Client
+
+4) Thread.sleep no time-api
+    - Timeout
+    - Fallback
+    - Circuit Breaker
+    - Health Check
+    - remove o .sleep
+
+5) Deploy no Kubernetes
+    quarkus.container-image.registry=docker.io
+    quarkus.container-image.group=[user]
+    quarkus.container-image.name=[app]
+    quarkus.container-image.tag=1.0-SNAPSHOT
+    quarkus.kubernetes-client.trust-certs=true
+
+    - time-api
+        - faz o deploy (mvn clean package -Dquarkus.kubernetes.deploy=true)
+        - oc expose svc time-api
+        - copia a route
+    - aponta time-app para a route do time-api
+    - time-app
+        - faz o deploy (mvn clean package -Dquarkus.kubernetes.deploy=true)
+        - oc expose svc time-api
+        - copia a route
+        - muda o while do terminal
