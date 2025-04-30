@@ -9,16 +9,15 @@ import org.eclipse.microprofile.rest.client.inject.RestClient;
 public class ReadinessCheck implements HealthCheck {
 
     @RestClient
-    TimeAppService timeAppService;
+    TimeApiService timeApiService;
 
     @Override
     public HealthCheckResponse call() {
 
-        if (timeAppService.getTime().equals(TimeAppService.MSG_ERRO)){
+        if (timeApiService.getTime().equals(TimeApiService.MSG_ERRO)){
             return HealthCheckResponse.down("não estou pronto");
         } else{
             return HealthCheckResponse.up("estou pronto");
         }
-
     }
 }
